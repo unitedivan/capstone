@@ -1,10 +1,8 @@
 /* Base Variables and Theme Setup */
 :root {
     /* Color Palette - Vibrant, creative aesthetic */
-    /* Yellow */
-    --bg-color-1: #fef08a;
-    /* Blue */
-    --bg-color-2: #bfdbfe;
+    --bg-color-1: #fef08a; /* Yellow */
+    --bg-color-2: #bfdbfe; /* Blue */
 
     --surface-glass: rgba(255, 255, 255, 0.45);
     --surface-glass-hover: rgba(255, 255, 255, 0.65);
@@ -14,10 +12,8 @@
     --text-secondary: #4a4a5a;
     --text-light: #707080;
 
-    /* Vibrant blue */
-    --accent-color: #2563eb;
-    /* Darker blue */
-    --accent-hover: #1d4ed8;
+    --accent-color: #2563eb; /* Vibrant blue */
+    --accent-hover: #1d4ed8; /* Darker blue */
     --accent-light: rgba(37, 99, 235, 0.15);
 
     /* Notification dot */
@@ -605,7 +601,12 @@ a {
 }
 
 .post-image-placeholder,
-.quilt-image {
+.quilt-image,
+.glass-art-image,
+.street-art-image,
+.digital-art-image,
+.Acrylic-image,
+.sketch-image {
     width: 100%;
     aspect-ratio: 1;
     background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
@@ -615,7 +616,12 @@ a {
     overflow: hidden;
 }
 
-.quilt-image img {
+.quilt-image img,
+.glass-art-image img,
+.street-art-image img,
+.digital-art-image img,
+.Acrylic-image img,
+.sketch-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
