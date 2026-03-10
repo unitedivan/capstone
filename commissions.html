@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Homepage</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Using Google Fonts for a modern, sleek typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Using Phosphor Icons for a clean, modern icon set -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <header class="top-nav glass-panel">
+            <div class="nav-links">
+                <a href="index.html" class="nav-item"><i class="ph ph-house"></i> Home</a>
+                <a href="commissions.html" class="nav-item active"><i class="ph ph-palette"></i>
+                    Commissions</a>
+                <a href="#" class="nav-item"><i class="ph ph-users"></i> Connect</a>
+                <a href="auth.html" class="nav-item"><i class="ph ph-user"></i> Profile</a>
+                <a href="#" class="nav-item"><i class="ph ph-gear"></i> Settings</a>
+            </div>
+
+            <div class="profile-section">
+                <!-- Notifications/Alerts Bell -->
+                <button class="icon-btn" aria-label="Notifications">
+                    <i class="ph ph-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+                <a class="profile-avatar" href="profile.html" aria-label="Open artist profile">
+                    <img src="https://ui-avatars.com/api/?name=Artist&background=2563eb&color=fff" alt="Profile avatar">
+                </a>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Left Vertical Sidebar -->
+            <aside class="sidebar glass-panel" id="sidebar">
+                <button class="toggle-btn" id="toggle-sidebar" aria-label="Toggle Navigation">
+                    <i class="ph ph-caret-left"></i>
+                </button>
+                <nav class="side-nav">
+                    <div class="nav-group-title">Portfolios</div>
+                    <a href="#" class="side-nav-item active has-submenu"><i class="ph ph-monitor"></i> <span
+                            class="nav-text">Digital Art</span></a>
+                    <div class="submenu expanded">
+                        <div class="submenu-inner">
+                            <a href="#" class="submenu-item">Tutorials</a>
+                            <a href="commissions.html" class="submenu-item"
+                                style="color: var(--accent-color);">Comm.</a>
+                        </div>
+                    </div>
+                    <a href="#" class="side-nav-item"><i class="ph ph-coffee"></i> <span
+                            class="nav-text">Pottery</span></a>
+                    <a href="#" class="side-nav-item"><i class="ph ph-diamond"></i> <span
+                            class="nav-text">Jewelry</span></a>
+                    <a href="#" class="side-nav-item"><i class="ph ph-music-notes"></i> <span
+                            class="nav-text">Music</span></a>
+                    <a href="#" class="side-nav-item"><i class="ph ph-yarn"></i> <span
+                            class="nav-text">Crochet</span></a>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- COMMISSION PAGE -->
+                <div class="content-card glass-panel" id="commission-page">
+                    <h1 class="page-title">Digital Art Commissions</h1>
+
+                    <div style="margin-bottom:20px;">
+                        <button class="btn btn-primary" onclick="addCommission()">+ Add Commission</button>
+                    </div>
+
+                    <div class="commission-grid" id="commission-grid">
+                        <div class="commission-card glass-panel">
+                            <img src="https://picsum.photos/400/300?1" alt="Commission 1">
+                            <h3>Anime Portrait</h3>
+                            <p>Artist: LunaArt</p>
+                            <p>$40</p>
+                        </div>
+
+                        <div class="commission-card glass-panel">
+                            <img src="https://picsum.photos/400/300?2" alt="Commission 2">
+                            <h3>Game Character Design</h3>
+                            <p>Artist: PixelMage</p>
+                            <p>$70</p>
+                        </div>
+
+                        <div class="commission-card glass-panel">
+                            <img src="https://picsum.photos/400/300?3" alt="Commission 3">
+                            <h3>Fantasy Illustration</h3>
+                            <p>Artist: NovaSketch</p>
+                            <p>$120</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function addCommission() {
+            let title = prompt("Commission Title");
+            let artist = prompt("Artist Name");
+            let price = prompt("Price");
+            let image = prompt("Image URL") || "https://picsum.photos/400/300";
+
+            let card = `
+                <div class="commission-card glass-panel">
+                    <img src="${image}" alt="${title}">
+                    <h3>${title}</h3>
+                    <p>Artist: ${artist}</p>
+                    <p>$${price}</p>
+                </div>
+            `;
+
+            document.getElementById("commission-grid").innerHTML += card;
+        }
+    </script>
+</body>
+
+</html>
