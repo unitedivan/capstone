@@ -39,7 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const submenuToggles = document.querySelectorAll('.has-submenu');
     submenuToggles.forEach(toggle => {
         toggle.addEventListener('click', (e) => {
-            e.preventDefault(); // Always prevent default for parent toggle
+            // Make sure we didn't click on an actual submenu link inside the toggle area
+            if (e.target.closest('.submenu')) {
+                return; // Let normal link navigation happen
+            }
+
+            e.preventDefault(); // Prevent default for parent toggle only
 
             // Find the immediate next sibling which assumes to be the submenu
             const submenu = toggle.nextElementSibling;
@@ -53,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add subtle entrance animation to the content
-    const sideNavItems = document.querySelectorAll('.side-nav-item');
-    sideNavItems.forEach((item, index) => {
+    const sideNavItems = document.querySelectorAll('.side-nav-item:not(.has-submenu)');
+    document.querySelectorAll('.side-nav-item').forEach((item, index) => {
         item.style.opacity = '0';
         item.style.transform = 'translateY(10px)';
         item.style.transitionDelay = `${index * 0.05}s`;

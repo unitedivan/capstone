@@ -225,7 +225,8 @@ a {
 
 .sidebar.collapsed {
     width: var(--sidebar-collapsed-width);
-    padding: 1.5rem 12px; /* Adjusted padding to help center icons precisely */
+    padding: 1.5rem 12px;
+    /* Adjusted padding to help center icons precisely */
 }
 
 .sidebar.collapsed .nav-text,
@@ -254,14 +255,15 @@ a {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.toggle-btn:hover {
-    color: var(--accent-color);
-    background: var(--accent-light);
-}
-
+/* Center the toggle button completely when collapsed */
 .sidebar.collapsed .toggle-btn {
     right: 50%;
     transform: translateX(50%);
+}
+
+.toggle-btn:hover {
+    color: var(--accent-color);
+    background: var(--accent-light);
 }
 
 .sidebar.collapsed .toggle-btn i {
@@ -287,7 +289,6 @@ a {
     white-space: nowrap;
 }
 
-/* Enhanced Sidebar with Submenus */
 .side-nav-item {
     display: flex;
     align-items: center;
@@ -302,9 +303,29 @@ a {
     cursor: pointer;
 }
 
+/* Submenu implementation via CSS Group Hover could be added later */
+
+.side-nav-item i {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+}
+
 .sidebar.collapsed .side-nav-item {
     padding: 0.8rem 10px;
-    /* Reduced paddings allow the icon to center in 68px width */
+}
+
+.nav-text {
+    transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+    flex: 1;
+}
+
+.side-nav-item:hover {
+    background: var(--surface-glass-hover);
+    color: var(--accent-color);
+    transform: translateX(4px);
 }
 
 /* Submenu container */
@@ -365,25 +386,6 @@ a {
 /* Hide submenu completely when sidebar is collapsed */
 .sidebar.collapsed .submenu {
     display: none;
-}
-
-.side-nav-item i {
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    width: 24px;
-    display: flex;
-    justify-content: center;
-}
-
-.nav-text {
-    transition: opacity var(--transition-smooth), transform var(--transition-smooth);
-    flex: 1;
-}
-
-.side-nav-item:hover {
-    background: var(--surface-glass-hover);
-    color: var(--accent-color);
-    transform: translateX(4px);
 }
 
 /* Main Content Area */
@@ -557,6 +559,128 @@ a {
     }
 }
 
+/* Tutorial Grid Styles */
+.tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.post-card {
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    transition: var(--transition-snappy);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.mini-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-color), #eab308);
+    flex-shrink: 0;
+}
+
+.username {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.post-image-placeholder,
+.quilt-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.quilt-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.post-image-placeholder::before {
+    content: '🎨';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.views {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: var(--transition-snappy);
+    padding: 0.25rem;
+    border-radius: 50%;
+}
+
+.like-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    transform: scale(1.1);
+}
+
+.post-card.viewed {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.like-btn.liked {
+    animation: heartPulse 0.6s ease;
+}
+
+@keyframes heartPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 @media (max-width: 768px) {
     .app-container {
         padding: 0.5rem;
@@ -611,423 +735,100 @@ a {
     }
 }
 
-/* ===== COMMISSION PAGE STYLES ===== */
-
-/* Responsive grid layout for displaying multiple commission offerings */
-.commission-grid {
+/* Tutorial Grid Layout */
+.tutorial-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-/* Container styling for individual commission items */
-.commission-card {
-    padding: 1rem;
-    border-radius: 16px;
-    transition: 0.3s;
-}
-
-/* Ensure images fit within their commission card containers and have soft edges */
-.commission-card img {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
     width: 100%;
+    align-content: start;
+}
+
+/* Post Card Styling from Sketch */
+.post-card {
+    background: #fff;
+    border: 1px solid #ddd;
     border-radius: 12px;
-    margin-bottom: 10px;
-}
-
-/* Lift effect on hover to indicate interactivity */
-.commission-card:hover {
-    transform: translateY(-6px);
-}
-
-/* ===== AUTHENTICATION PAGE STYLES ===== */
-
-/* Centers the auth area and keeps it responsive within 640px */
-.auth-shell {
-    width: min(640px, 100%);
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    min-height: 280px;
+    overflow: hidden;
+    transition: transform 0.2s;
 }
 
-/* Main card holding the auth forms */
-.auth-panel {
-    width: 100%;
-    border-radius: var(--border-radius-lg);
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.55);
+.post-card:hover {
+    transform: translateY(-5px);
 }
 
-/* Two-column tab switcher for login / sign up */
-.auth-tabs {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-
-/* Default tab button layout */
-.auth-tab {
-    border: 1px solid var(--surface-border);
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--text-secondary);
-    border-radius: var(--border-radius-sm);
-    padding: 0.7rem 1rem;
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-snappy);
-}
-
-/* Hover state for tab buttons */
-.auth-tab:hover {
-    color: var(--accent-color);
-    background: var(--surface-glass-hover);
-}
-
-/* Currently selected tab styling */
-.auth-tab.active {
-    background: var(--accent-color);
-    color: white;
-    border-color: transparent;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-}
-
-/* Auth Forms are hidden until activated by JS */
-.auth-form {
-    display: none;
-    gap: 0.65rem;
-}
-
-/* Activated visible form */
-.auth-form.active {
-    display: grid;
-}
-
-/* Label text above each input */
-.auth-label {
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-
-/* Shared text input styling */
-.auth-input {
-    width: 100%;
-    border-radius: var(--border-radius-sm);
-    border: 1px solid var(--surface-border);
-    padding: 0.8rem 0.9rem;
-    font: inherit;
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.9);
-    outline: none;
-    transition: var(--transition-snappy);
-}
-
-/* Focus outline state to help the user see the active field */
-.auth-input:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
-/* Gives the submit button extra spacing from the last input */
-.auth-submit {
-    margin-top: 0.5rem;
-}
-
-/* Slightly tighter padding on smaller screens for the auth panel */
-@media (max-width: 768px) {
-    .auth-panel {
-        padding: 1rem;
-    }
-}
-
-/* ===== PROFILE PAGE STYLES ===== */
-
-/* Slightly lighter card style for nested blocks inside the profile */
-.glass-panel-lite {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid var(--surface-border);
-    border-radius: var(--border-radius-md);
-}
-
-/* Two-column profile layout: left info panel + main right content */
-.profile-layout {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 1.5rem;
-    min-height: 560px;
-}
-
-/* Left profile info column wrapping stats and bio */
-.profile-left {
-    min-height: 100%;
-    padding: 1rem;
+.post-header {
     display: flex;
-    flex-direction: column;
-    /*gap: 1rem;*/
-    /*overflow-y: auto;*/
-}
-
-/* Generic small block used inside the left profile column for sections */
-.profile-side-block {
-    background: rgba(255, 255, 255, 0.48);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-radius: 16px;
-    padding: 1rem;
-}
-
-/* Small label above each left panel section (e.g. "Artist Bio") */
-.side-kicker {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-light);
-    margin-bottom: 0.45rem;
-}
-
-/* Optional heading style for names in the left-side content */
-.side-name {
-    font-size: 1.35rem;
-    margin-bottom: 0.55rem;
-}
-
-/* Paragraph copy text inside the left panel */
-.side-copy {
-    color: var(--text-secondary);
-    line-height: 1.55;
-    font-size: 0.95rem;
-}
-
-/* Container for profile statistical data */
-.stats-block {
-    display: grid;
-    gap: 0.5rem;
-}
-
-/* Each follower/project/commission line item */
-.stat-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-}
-
-/* Number value formatting for stats */
-.stat-value {
-    font-size: 1.15rem;
-    font-weight: 700;
-}
-
-/* Label text formatting for stats */
-.stat-label {
-    color: var(--text-light);
-    font-size: 0.9rem;
-}
-
-/* Flex wrapper to group skill tags */
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-/* Individual specialty skill tag appearance */
-.tag-pill {
-    display: inline-flex;
     align-items: center;
-    padding: 0.4rem 0.75rem;
-    border-radius: 999px;
-    background: rgba(37, 99, 235, 0.12);
-    color: var(--accent-color);
+    gap: 8px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.mini-avatar {
+    width: 24px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.username {
     font-size: 0.85rem;
     font-weight: 600;
 }
 
-/* List container for social links in the left profile column */
-.social-block {
-    display: grid;
-    gap: 0.75rem;
+.post-image-placeholder {
+    flex-grow: 1;
+    background: #f9f9f9;
+    /* Represents the tutorial content area */
 }
 
-/* Social link row hover effect and layout */
-.social-block a {
+.post-footer {
     display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-}
-
-/* Main right-side profile content area layout grid */
-.profile-main {
-    display: grid;
-    gap: 1rem;
-    grid-template-rows: auto auto 1fr;
-}
-
-/* Top row containing the user's username panel and the featured banner */
-.profile-top-row {
-    display: grid;
-    grid-template-columns: 1fr 310px;
-    gap: 1rem;
-}
-
-/* Username and Avatar Container */
-.profile-info {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    align-items: center;
-}
-
-/* Large circular avatar with initials */
-.avatar-circle {
-    width: 104px;
-    height: 104px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    border: 3px solid rgba(30, 30, 36, 0.12);
-    background: linear-gradient(135deg, #2563eb, #60a5fa);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
-}
-
-/* Ensures avatar initials always display uppercase */
-.avatar-initials {
-    text-transform: uppercase;
-}
-
-/* Username main heading */
-.profile-text h1 {
-    font-size: 2rem;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-}
-
-/* Short descriptive paragraph under username */
-.profile-text p {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.55;
-}
-
-/* Featured banner block on the top right */
-.profile-banner {
-    min-height: 145px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    background: linear-gradient(145deg, rgba(59, 130, 246, 0.18), rgba(255, 255, 255, 0.72));
+    padding: 10px;
+    font-size: 0.9rem;
 }
 
-/* Small colorful banner label text */
-.banner-label {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent-color);
-    font-weight: 700;
+/* Sidebar Hover Option (From your "Digital Art" sketch note) */
+.has-hover {
+    position: relative;
 }
 
-/* Banner title text */
-.profile-banner h2 {
-    font-size: 1.5rem;
+.hover-menu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 10;
+    width: 120px;
 }
 
-/* Banner description text */
-.profile-banner p {
-    color: var(--text-secondary);
-    line-height: 1.5;
+.has-hover:hover .hover-menu {
+    display: block;
 }
 
-/* Link/button styling pointing to collection */
-.banner-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: var(--accent-color);
-    font-weight: 600;
+.hover-menu a {
+    display: block;
     text-decoration: none;
+    color: var(--text-dark);
+    padding: 5px 0;
+    font-size: 0.9rem;
 }
 
-/* Row of tab buttons controlling the profile views */
-.profile-tabs {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-/* Tab button individual appearance */
-.tab-btn {
-    border: 1px solid var(--surface-border);
-    background: rgba(255, 255, 255, 0.75);
-    border-radius: var(--border-radius-sm);
-    padding: 0.8rem;
-    font-family: inherit;
-    font-weight: 600;
-}
-
-/* Grid of content cards/posts displayed underneath the tabs */
-.post-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-/* Individual card inside the posts repository */
-.post-card {
-    min-height: 200px;
-    padding: 1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.56));
-}
-
-/* Tablet layout constraints adjusting profile column wrapping */
-@media (max-width: 1024px) {
-    .profile-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .profile-left {
-        min-height: auto;
-    }
-
-    .profile-top-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Mobile layout constraints for simpler views */
-@media (max-width: 768px) {
-
-    .profile-tabs,
-    .post-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .profile-info {
-        align-items: flex-start;
-    }
-
-    .avatar-circle {
-        width: 84px;
-        height: 84px;
-        font-size: 1.5rem;
-    }
-
-    .profile-text h1 {
-        font-size: 1.6rem;
-    }
+/* Sidebar Toggle Arrow */
+.toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    float: right;
+    color: #888;
 }
