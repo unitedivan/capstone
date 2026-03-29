@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist Homepage</title>
+    <script>
+        try {
+            if (localStorage.getItem('sidebar-collapsed') === 'true') {
+                document.documentElement.classList.add('sidebar-collapsed-init');
+            }
+        } catch (error) {}
+    </script>
     <link rel="stylesheet" href="styles.css">
     <!-- Using Google Fonts for a modern, sleek typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,58 +79,20 @@
                 <!-- COMMISSION PAGE -->
                 <div class="content-card glass-panel" id="commission-page">
                     <h1 class="page-title">Digital Art Commissions</h1>
+                    <p id="commission-message" class="commission-message" aria-live="polite"></p>
 
                     <div style="margin-bottom:20px;">
-                        <button class="btn btn-primary" onclick="addCommission()">+ Add Commission</button>
+                        <button class="btn btn-primary" id="add-commission-btn" type="button">+ Add Commission</button>
                     </div>
 
-                    <div class="commission-grid" id="commission-grid">
-                        <div class="commission-card glass-panel">
-                            <img src="https://picsum.photos/400/300?1" alt="Commission 1">
-                            <h3>Anime Portrait</h3>
-                            <p>Artist: LunaArt</p>
-                            <p>$40</p>
-                        </div>
-
-                        <div class="commission-card glass-panel">
-                            <img src="https://picsum.photos/400/300?2" alt="Commission 2">
-                            <h3>Game Character Design</h3>
-                            <p>Artist: PixelMage</p>
-                            <p>$70</p>
-                        </div>
-
-                        <div class="commission-card glass-panel">
-                            <img src="https://picsum.photos/400/300?3" alt="Commission 3">
-                            <h3>Fantasy Illustration</h3>
-                            <p>Artist: NovaSketch</p>
-                            <p>$120</p>
-                        </div>
-                    </div>
+                    <div class="commission-grid" id="commission-grid"></div>
                 </div>
             </main>
         </div>
     </div>
 
     <script src="script.js"></script>
-    <script>
-        function addCommission() {
-            let title = prompt("Commission Title");
-            let artist = prompt("Artist Name");
-            let price = prompt("Price");
-            let image = prompt("Image URL") || "https://picsum.photos/400/300";
-
-            let card = `
-                <div class="commission-card glass-panel">
-                    <img src="${image}" alt="${title}">
-                    <h3>${title}</h3>
-                    <p>Artist: ${artist}</p>
-                    <p>$${price}</p>
-                </div>
-            `;
-
-            document.getElementById("commission-grid").innerHTML += card;
-        }
-    </script>
+    <script src="commissions.js"></script>
 </body>
 
 </html>

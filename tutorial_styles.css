@@ -219,6 +219,40 @@ a {
     overflow: hidden;
 }
 
+.sidebar-collapsed-init .sidebar {
+    width: var(--sidebar-collapsed-width);
+    padding: 1.5rem 12px;
+}
+
+.sidebar-collapsed-init .sidebar .nav-text,
+.sidebar-collapsed-init .sidebar .nav-group-title {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-10px);
+}
+
+.sidebar-collapsed-init .sidebar .toggle-btn {
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.sidebar-collapsed-init .sidebar .toggle-btn i {
+    transform: rotate(180deg);
+}
+
+.sidebar:not(.sidebar-ready),
+.sidebar:not(.sidebar-ready) .toggle-btn,
+.sidebar:not(.sidebar-ready) .toggle-btn i,
+.sidebar:not(.sidebar-ready) .nav-group-title,
+.sidebar:not(.sidebar-ready) .nav-text,
+.sidebar-collapsed-init .sidebar,
+.sidebar-collapsed-init .sidebar .toggle-btn,
+.sidebar-collapsed-init .sidebar .toggle-btn i,
+.sidebar-collapsed-init .sidebar .nav-group-title,
+.sidebar-collapsed-init .sidebar .nav-text {
+    transition: none;
+}
+
 .sidebar.collapsed {
     width: var(--sidebar-collapsed-width);
     /* Adjusted padding to help center icons precisely */

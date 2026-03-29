@@ -7,6 +7,13 @@
 
     <!-- Page title shown in the browser tab -->
     <title>Artist Login</title>
+    <script>
+        try {
+            if (localStorage.getItem('sidebar-collapsed') === 'true') {
+                document.documentElement.classList.add('sidebar-collapsed-init');
+            }
+        } catch (error) {}
+    </script>
 
     <!-- Shared site styles -->
     <link rel="stylesheet" href="styles.css">
@@ -79,9 +86,19 @@
                         <!-- Intro text -->
                         <h1 class="page-title">Welcome Back</h1>
                         <p class="intro-text">Log in or create an account to continue to your profile page.</p>
+                        <p id="auth-message" class="auth-message" aria-live="polite"></p>
+                        <div id="auth-session-panel" class="auth-session-panel glass-panel-lite" hidden>
+                            <p class="auth-session-copy">
+                                Signed in as <strong id="auth-session-name">Artist</strong>.
+                            </p>
+                            <div class="auth-session-actions">
+                                <a href="profile.html" class="btn btn-primary">Go to Profile</a>
+                                <button id="auth-logout-btn" class="btn btn-secondary" type="button">Log Out</button>
+                            </div>
+                        </div>
 
                         <!-- Card that holds login/signup tabs and forms -->
-                        <div class="auth-panel glass-panel">
+                        <div id="auth-panel" class="auth-panel glass-panel">
                             <!-- Tab buttons used to switch between login and sign up -->
                             <div class="auth-tabs" role="tablist" aria-label="Account actions">
                                 <button class="auth-tab active" data-auth-tab="login" type="button" role="tab"

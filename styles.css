@@ -223,6 +223,40 @@ a {
     overflow: hidden;
 }
 
+.sidebar-collapsed-init .sidebar {
+    width: var(--sidebar-collapsed-width);
+    padding: 1.5rem 12px;
+}
+
+.sidebar-collapsed-init .sidebar .nav-text,
+.sidebar-collapsed-init .sidebar .nav-group-title {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-10px);
+}
+
+.sidebar-collapsed-init .sidebar .toggle-btn {
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.sidebar-collapsed-init .sidebar .toggle-btn i {
+    transform: rotate(180deg);
+}
+
+.sidebar:not(.sidebar-ready),
+.sidebar:not(.sidebar-ready) .toggle-btn,
+.sidebar:not(.sidebar-ready) .toggle-btn i,
+.sidebar:not(.sidebar-ready) .nav-group-title,
+.sidebar:not(.sidebar-ready) .nav-text,
+.sidebar-collapsed-init .sidebar,
+.sidebar-collapsed-init .sidebar .toggle-btn,
+.sidebar-collapsed-init .sidebar .toggle-btn i,
+.sidebar-collapsed-init .sidebar .nav-group-title,
+.sidebar-collapsed-init .sidebar .nav-text {
+    transition: none;
+}
+
 .sidebar.collapsed {
     width: var(--sidebar-collapsed-width);
     /* Adjusted padding to help center icons precisely */
@@ -301,6 +335,23 @@ a {
     white-space: nowrap;
     position: relative;
     cursor: pointer;
+}
+
+.side-nav-item.sidebar-entrance {
+    animation: sidebarEntrance 0.36s ease-out both;
+    animation-delay: var(--sidebar-entrance-delay, 0s);
+}
+
+@keyframes sidebarEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .sidebar.collapsed .side-nav-item {
@@ -641,6 +692,38 @@ a {
     transform: translateY(-6px);
 }
 
+.commission-message,
+.auth-message {
+    min-height: 1.5rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.commission-message.error,
+.auth-message.error {
+    color: #b91c1c;
+}
+
+.commission-message.success,
+.auth-message.success {
+    color: #15803d;
+}
+
+.commission-message.info,
+.auth-message.info {
+    color: var(--accent-color);
+}
+
+.commission-delete-btn {
+    margin-top: 0.75rem;
+}
+
+.commission-empty-state {
+    padding: 1.25rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
 /* ===== AUTHENTICATION PAGE STYLES ===== */
 
 /* Centers the auth area and keeps it responsive within 640px */
@@ -658,6 +741,27 @@ a {
     border-radius: var(--border-radius-lg);
     padding: 1.5rem;
     background: rgba(255, 255, 255, 0.55);
+}
+
+.auth-session-panel {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    display: grid;
+    gap: 0.9rem;
+}
+
+.auth-session-panel[hidden] {
+    display: none;
+}
+
+.auth-session-copy {
+    color: var(--text-secondary);
+}
+
+.auth-session-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 /* Two-column tab switcher for login / sign up */
@@ -961,7 +1065,7 @@ a {
 /* Row of tab buttons controlling the profile views */
 .profile-tabs {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
 }
 
@@ -973,6 +1077,22 @@ a {
     padding: 0.8rem;
     font-family: inherit;
     font-weight: 600;
+}
+
+.tab-btn-secondary {
+    color: #b91c1c;
+}
+
+.tab-btn-secondary:hover {
+    color: #991b1b;
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+.tab-btn-danger {
+    color: white;
+    background: #b91c1c;
+    border-color: transparent;
 }
 
 /* Grid of content cards/posts displayed underneath the tabs */

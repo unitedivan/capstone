@@ -9,6 +9,13 @@
 
   <!-- Title shown in the browser tab -->
   <title>Artist Profile</title>
+  <script>
+    try {
+      if (localStorage.getItem('sidebar-collapsed') === 'true') {
+        document.documentElement.classList.add('sidebar-collapsed-init');
+      }
+    } catch (error) {}
+  </script>
 
   <!-- Main stylesheet for the profile page -->
   <link rel="stylesheet" href="styles.css">
@@ -44,7 +51,7 @@
         </button>
 
         <div class="profile-avatar">
-          <img src="https://ui-avatars.com/api/?name=Artist&background=2563eb&color=fff" alt="Profile avatar">
+          <img id="top-profile-avatar" src="https://ui-avatars.com/api/?name=Artist&background=2563eb&color=fff" alt="Profile avatar">
         </div>
       </div>
     </header>
@@ -86,18 +93,18 @@
               <!-- Short bio section -->
               <div class="profile-side-block">
                 <p class="side-kicker">Artist Bio</p>
-                <p class="side-copy">Here users can put their description of their work.</p>
+                <p class="side-copy" data-profile-bio>Here users can put their description of their work.</p>
               </div>
 
               <!-- Quick profile stats -->
               <div class="profile-side-block stats-block">
                 <div class="stat-row">
-                  <span class="stat-value">???</span>
-                  <span class="stat-label">Followers</span>
+                  <span class="stat-value" data-profile-name>Artist</span>
+                  <span class="stat-label">Display Name</span>
                 </div>
                 <div class="stat-row">
-                  <span class="stat-value">TBD</span>
-                  <span class="stat-label">Projects</span>
+                  <span class="stat-value" data-profile-email>artist@example.com</span>
+                  <span class="stat-label">Email</span>
                 </div>
                 <div class="stat-row">
                   <span class="stat-value">Open</span>
@@ -108,7 +115,7 @@
               <!-- Tags that show the user's specialties -->
               <div class="profile-side-block">
                 <p class="side-kicker">Specialties</p>
-                <div class="tag-list">
+                <div class="tag-list" id="profile-specialties">
                   <span class="tag-pill">Digital Illustration</span>
                   <span class="tag-pill">Comics</span>
                   <span class="tag-pill">Crochet</span>
@@ -119,7 +126,7 @@
               <div class="profile-side-block social-block">
                 <a href="#"><i class="ph ph-instagram-logo"></i> @Username</a>
                 <a href="#"><i class="ph ph-globe"></i> Portfolio Site</a>
-                <a href="#"><i class="ph ph-envelope-simple"></i> Contact Artist</a>
+                <a href="#"><i class="ph ph-envelope-simple"></i> <span data-profile-email>Contact Artist</span></a>
               </div>
             </aside>
 
@@ -131,13 +138,13 @@
 
                 <!-- Username, initials avatar, and short intro -->
                 <div class="profile-info glass-panel-lite">
-                  <div class="avatar-circle avatar-initials" aria-label="Mila Hart initials">
+                  <div class="avatar-circle avatar-initials" data-profile-initials aria-label="Artist initials">
                     AR
                   </div>
 
                   <div class="profile-text">
-                    <h1>Username</h1>
-                    <p>Description about themselves here.</p>
+                    <h1 data-profile-name>Username</h1>
+                    <p data-profile-bio>Description about themselves here.</p>
                   </div>
                 </div>
 
@@ -155,6 +162,8 @@
                 <button class="tab-btn">My Art</button>
                 <button class="tab-btn">Comm.</button>
                 <button class="tab-btn">Tutorials</button>
+                <button id="profile-logout-btn" class="tab-btn tab-btn-secondary" type="button">Log Out</button>
+                <button id="profile-delete-btn" class="tab-btn tab-btn-danger" type="button">Delete Account Data</button>
               </div>
 
               <!-- Grid of featured content / posts -->
@@ -172,6 +181,7 @@
 
   <!-- Shared site interactions -->
   <script src="script.js"></script>
+  <script src="profile.js"></script>
 </body>
 
 </html>
