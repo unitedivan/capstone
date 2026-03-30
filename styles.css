@@ -1152,3 +1152,10 @@ a {
         font-size: 1.6rem;
     }
 }
+.category-section {
+    display: none;
+}
+
+.category-section.active {
+    display: block;
+}
