@@ -113,3 +113,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadCommissions();
 });
+function showCategory(categoryId, element) {
+    // hide all category sections
+    document.querySelectorAll('.category-section').forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // show the selected section
+    document.getElementById(categoryId).classList.add('active');
+
+    // remove 'active' from all sidebar items
+    document.querySelectorAll('.side-nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // highlight the clicked sidebar item
+    element.classList.add('active');
+}
