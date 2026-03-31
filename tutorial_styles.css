@@ -1,8 +1,10 @@
 /* Base Variables and Theme Setup */
 :root {
     /* Color Palette - Vibrant, creative aesthetic */
-    --bg-color-1: #fef08a; /* Yellow */
-    --bg-color-2: #bfdbfe; /* Blue */
+    --bg-color-1: #fef08a;
+    /* Yellow */
+    --bg-color-2: #bfdbfe;
+    /* Blue */
 
     --surface-glass: rgba(255, 255, 255, 0.45);
     --surface-glass-hover: rgba(255, 255, 255, 0.65);
@@ -12,12 +14,14 @@
     --text-secondary: #4a4a5a;
     --text-light: #707080;
 
-    --accent-color: #2563eb; /* Vibrant blue */
-    --accent-hover: #1d4ed8; /* Darker blue */
+    --accent-color: #2563eb;
+    /* Vibrant blue */
+    --accent-hover: #1d4ed8;
+    /* Darker blue */
     --accent-light: rgba(37, 99, 235, 0.15);
 
-    /* Notification dot */
     --alert-color: #ef4444;
+    /* Notification dot */
 
     /* Typography */
     --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -204,8 +208,8 @@ a {
     display: flex;
     flex: 1;
     gap: 1rem;
-    /* Important for scrollable main content */
     min-height: 0;
+    /* Important for scrollable main content */
 }
 
 /* Left Sidebar */
@@ -215,48 +219,12 @@ a {
     flex-direction: column;
     padding: 1.5rem 1rem;
     position: relative;
-    transition: width var(--transition-smooth), padding var(--transition-smooth);
+    transition: width var(--transition-smooth);
     overflow: hidden;
-}
-
-.sidebar-collapsed-init .sidebar {
-    width: var(--sidebar-collapsed-width);
-    padding: 1.5rem 12px;
-}
-
-.sidebar-collapsed-init .sidebar .nav-text,
-.sidebar-collapsed-init .sidebar .nav-group-title {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(-10px);
-}
-
-.sidebar-collapsed-init .sidebar .toggle-btn {
-    right: 50%;
-    transform: translateX(50%);
-}
-
-.sidebar-collapsed-init .sidebar .toggle-btn i {
-    transform: rotate(180deg);
-}
-
-.sidebar:not(.sidebar-ready),
-.sidebar:not(.sidebar-ready) .toggle-btn,
-.sidebar:not(.sidebar-ready) .toggle-btn i,
-.sidebar:not(.sidebar-ready) .nav-group-title,
-.sidebar:not(.sidebar-ready) .nav-text,
-.sidebar-collapsed-init .sidebar,
-.sidebar-collapsed-init .sidebar .toggle-btn,
-.sidebar-collapsed-init .sidebar .toggle-btn i,
-.sidebar-collapsed-init .sidebar .nav-group-title,
-.sidebar-collapsed-init .sidebar .nav-text {
-    transition: none;
 }
 
 .sidebar.collapsed {
     width: var(--sidebar-collapsed-width);
-    /* Adjusted padding to help center icons precisely */
-    padding: 1.5rem 12px;
 }
 
 .sidebar.collapsed .nav-text,
@@ -283,12 +251,6 @@ a {
     z-index: 10;
     transition: var(--transition-snappy);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-/* Center the toggle button completely when collapsed */
-.sidebar.collapsed .toggle-btn {
-    right: 50%;
-    transform: translateX(50%);
 }
 
 .toggle-btn:hover {
@@ -329,8 +291,6 @@ a {
     font-weight: 500;
     transition: var(--transition-snappy);
     white-space: nowrap;
-    position: relative;
-    cursor: pointer;
 }
 
 /* Submenu implementation via CSS Group Hover could be added later */
@@ -341,10 +301,6 @@ a {
     width: 24px;
     display: flex;
     justify-content: center;
-}
-
-.sidebar.collapsed .side-nav-item {
-    padding: 0.8rem 10px;
 }
 
 .nav-text {
@@ -358,62 +314,51 @@ a {
     transform: translateX(4px);
 }
 
-/* Submenu container */
-.submenu {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease-out;
-    margin-left: 2.2rem;
-    overflow: hidden;
-}
-
-/* Expanded state for submenu */
-.submenu.expanded {
-    grid-template-rows: 1fr;
-}
-
-.submenu-inner {
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding-top: 0.2rem;
-}
-
-/* Individual Submenu buttons */
-.submenu-item {
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-sm);
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    transition: var(--transition-snappy);
-    text-decoration: none;
+.side-nav-item-container {
     position: relative;
 }
 
-.submenu-item::before {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 50%;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--surface-border);
-    transform: translateY(-50%);
+.submenu {
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    margin-left: 2rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent-light);
+}
+
+.side-nav-item-container:hover .submenu {
+    display: flex;
+}
+
+.submenu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--border-radius-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
     transition: var(--transition-snappy);
+    white-space: nowrap;
+}
+
+.submenu-item i {
+    font-size: 1rem;
+    flex-shrink: 0;
+    width: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .submenu-item:hover {
-    color: var(--accent-color);
     background: var(--surface-glass-hover);
+    color: var(--accent-color);
+    transform: translateX(2px);
 }
 
-.submenu-item:hover::before {
-    background: var(--accent-color);
-}
-
-/* Hide submenu completely when sidebar is collapsed */
 .sidebar.collapsed .submenu {
     display: none;
 }
@@ -582,8 +527,8 @@ a {
     }
 
     .about-image-container {
-        /* Move image above text on mobile */
         grid-row: 1;
+        /* Move image above text on mobile */
         max-width: 600px;
         margin: 0 auto;
     }
@@ -640,7 +585,8 @@ a {
 .street-art-image,
 .digital-art-image,
 .Acrylic-image,
-.sketch-image {
+.sketch-image,
+.video-preview {
     width: 100%;
     aspect-ratio: 1;
     background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
@@ -655,7 +601,8 @@ a {
 .street-art-image img,
 .digital-art-image img,
 .Acrylic-image img,
-.sketch-image img {
+.sketch-image img,
+.video-preview img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -731,8 +678,8 @@ a {
     }
 
     .nav-links {
-        /* Hide top nav links on mobile, would need a hamburger menu */
         display: none;
+        /* Hide top nav links on mobile, would need a hamburger menu */
     }
 
     .sidebar {
@@ -762,8 +709,8 @@ a {
     }
 
     .toggle-btn {
-        /* Hide toggle button on mobile, trigger from top bar instead */
         display: none;
+        /* Hide toggle button on mobile, trigger from top bar instead */
     }
 
     .content-card {
@@ -822,8 +769,8 @@ a {
 
 .post-image-placeholder {
     flex-grow: 1;
-    /* Represents the tutorial content area */
     background: #f9f9f9;
+    /* Represents the tutorial content area */
 }
 
 .post-footer {
@@ -831,6 +778,99 @@ a {
     justify-content: space-between;
     padding: 10px;
     font-size: 0.9rem;
+}
+
+/* Modal Popup (TikTok video + right-side comments) */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 9999;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.modal-content {
+    width: min(1100px, 95%);
+    max-height: 90vh;
+    background: rgba(255, 255, 255, 0.93);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    border: none;
+    background: #fff;
+    color: #333;
+    font-size: 1.5rem;
+    line-height: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    max-height: calc(90vh - 24px);
+}
+
+.modal-video-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modal-video-panel .modal-video-title {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.modal-video-panel iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background: #000;
+}
+
+.modal-comments-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.modal-comments-panel h3 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+@media (max-width: 960px) {
+    .modal-body {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-video-panel iframe {
+        min-height: 260px;
+    }
 }
 
 /* Sidebar Hover Option (From your "Digital Art" sketch note) */
@@ -860,6 +900,73 @@ a {
     text-decoration: none;
     color: var(--text-dark);
     padding: 5px 0;
+    font-size: 0.9rem;
+}
+
+/* Comments and Embedded video style */
+.comments-section {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.comments-section h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.comments-section p {
+    margin-bottom: 0.8rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.comment-form {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: var(--border-radius-sm);
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.comment-form button {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background: var(--accent-color);
+    color: #fff;
+    cursor: pointer;
+    transition: var(--transition-snappy);
+}
+
+.comment-form button:hover {
+    background: var(--accent-hover);
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.comment-item {
+    padding: 0.6rem;
+    background: white;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     font-size: 0.9rem;
 }
 
