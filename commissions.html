@@ -6,29 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist Homepage</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Using Google Fonts for a modern, sleek typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Using Phosphor Icons for a clean, modern icon set -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
     <div class="app-container">
-        <!-- Top Navigation -->
         <header class="top-nav glass-panel">
             <div class="nav-links">
                 <a href="index.html" class="nav-item"><i class="ph ph-house"></i> Home</a>
-                <a href="commissions.html" class="nav-item active"><i class="ph ph-palette"></i>
-                    Commissions</a>
+                <a href="commissions.html" class="nav-item active"><i class="ph ph-palette"></i> Commissions</a>
                 <a href="#" class="nav-item"><i class="ph ph-users"></i> Connect</a>
                 <a href="auth.html" class="nav-item"><i class="ph ph-user"></i> Profile</a>
                 <a href="#" class="nav-item"><i class="ph ph-gear"></i> Settings</a>
             </div>
 
             <div class="profile-section">
-                <!-- Notifications/Alerts Bell -->
                 <button class="icon-btn" aria-label="Notifications">
                     <i class="ph ph-bell"></i>
                     <span class="notification-dot"></span>
@@ -40,38 +35,55 @@
         </header>
 
         <div class="content-wrapper">
-            <!-- Left Vertical Sidebar -->
             <aside class="sidebar glass-panel" id="sidebar">
                 <button class="toggle-btn" id="toggle-sidebar" aria-label="Toggle Navigation">
                     <i class="ph ph-caret-left"></i>
                 </button>
+
                 <nav class="side-nav">
                     <div class="nav-group-title">Commissions & Tutorials</div>
-                    <a href="#" class="side-nav-item active has-submenu"><i class="ph ph-monitor"></i> <span
-                            class="nav-text">Digital Art</span></a>
+
+                    <a href="#" class="side-nav-item active has-submenu">
+                        <i class="ph ph-monitor"></i>
+                        <span class="nav-text">Digital Art</span>
+                    </a>
+
                     <div class="submenu expanded">
                         <div class="submenu-inner">
                             <a href="tutorial.html" class="submenu-item">Tutorials</a>
-                            <a href="commissions.html" class="submenu-item"
-                                style="color: var(--accent-color);">Comm.</a>
+                            <a href="commissions.html" class="submenu-item" style="color: var(--accent-color);">Comm.</a>
                         </div>
                     </div>
-                    <a href="#" class="side-nav-item" onclick="showCategory('digital', this)"><i class="ph ph-monitor"></i> Digital Art</a>
-                    <a href="#" class="side-nav-item" onclick="showCategory('pottery', this)"><i class="ph ph-coffee"></i> Pottery</a>
-                    <a href="#" class="side-nav-item" onclick="showCategory('jewelry', this)"><i class="ph ph-diamond"></i> Jewelry</a>
-                    <a href="#" class="side-nav-item" onclick="showCategory('music', this)"><i class="ph ph-music-notes"></i> Music</a>
-                    <a href="#" class="side-nav-item" onclick="showCategory('crochet', this)"><i class="ph ph-yarn"></i> Crochet</a>
+
+                    <a href="#" class="side-nav-item" onclick="showCategory('pottery', this)">
+                        <i class="ph ph-coffee"></i>
+                        <span class="nav-text">Pottery</span>
+                    </a>
+
+                    <a href="#" class="side-nav-item" onclick="showCategory('jewelry', this)">
+                        <i class="ph ph-diamond"></i>
+                        <span class="nav-text">Jewelry</span>
+                    </a>
+
+                    <a href="#" class="side-nav-item" onclick="showCategory('music', this)">
+                        <i class="ph ph-music-notes"></i>
+                        <span class="nav-text">Music</span>
+                    </a>
+
+                    <a href="#" class="side-nav-item" onclick="showCategory('crochet', this)">
+                        <i class="ph ph-yarn"></i>
+                        <span class="nav-text">Crochet</span>
+                    </a>
                 </nav>
             </aside>
 
-            <!-- Main Content Area -->
             <main class="main-content">
                 <div class="content-card glass-panel">
-                    
+
                     <div id="digital" class="category-section active">
                         <h1 class="page-title">Digital Art Commissions</h1>
                         <button class="btn btn-primary" onclick="addCommission('digital-grid')">+ Add Digital Art</button>
-                        <div class="commission-grid" id="digital-grid">
+                        <div class="commission-grid" id="digital-grid"></div>
                     </div>
 
                     <div id="pottery" class="category-section">
@@ -102,29 +114,51 @@
             </main>
         </div>
     </div>
-<script src="script.js"></script>
+
+    <script src="script.js"></script>
     <script>
-        function showSection(id){
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
+        function showCategory(categoryId, element) {
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.classList.remove('active');
+            });
 
-function addCommission(gridId){
-let title = prompt("Title");
-let artist = prompt("Artist");
-let price = prompt("Price");
-let image = prompt("Image URL") || "https://picsum.photos/300";
+            const selectedSection = document.getElementById(categoryId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
 
-let card = `
-<div class="commission-card">
-<img src="${image}">
-<h3>${title}</h3>
-<p>${artist}</p>
-<p>$${price}</p>
-</div>';
+            document.querySelectorAll('.side-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
 
-document.getElementById(gridId).innerHTML += card;
-}
+            if (element) {
+                element.classList.add('active');
+            }
+        }
+
+        function addCommission(gridId) {
+            let title = prompt("Title");
+            if (!title) return;
+
+            let artist = prompt("Artist");
+            if (!artist) return;
+
+            let price = prompt("Price");
+            if (!price) return;
+
+            let image = prompt("Image URL") || "https://picsum.photos/300";
+
+            let card = `
+                <div class="commission-card">
+                    <img src="${image}" alt="${title}">
+                    <h3>${title}</h3>
+                    <p>${artist}</p>
+                    <p>$${price}</p>
+                </div>
+            `;
+
+            document.getElementById(gridId).innerHTML += card;
+        }
     </script>
 </body>
 
