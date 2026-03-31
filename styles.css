@@ -1152,10 +1152,26 @@ a {
         font-size: 1.6rem;
     }
 }
+
 .category-section {
     display: none;
 }
 
 .category-section.active {
     display: block;
+}
+
+.account-settings {
+    line-height: 40px;
+    padding-bottom: 30px;
+}
+
+.notification-settings {
+    line-height: 40px;
+    padding-bottom: 30px;
+}
+
+.theme-settings {
+    line-height: 40px;
+    padding-bottom: 30px;
 }
