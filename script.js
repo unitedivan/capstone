@@ -1,4 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const currentUserRaw = localStorage.getItem('currentUser');
+    const navAvatarImages = document.querySelectorAll('.profile-avatar img');
+
+    if (currentUserRaw && navAvatarImages.length) {
+        try {
+            const currentUser = JSON.parse(currentUserRaw);
+            const savedProfileImage = localStorage.getItem(`profileImage_${currentUser.id}`);
+            const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.name)}&background=2563eb&color=fff`;
+            const avatarSrc = savedProfileImage || fallbackAvatar;
+
+            navAvatarImages.forEach((image) => {
+                image.src = avatarSrc;
+            });
+        } catch (error) {}
+    }
+
     // Left Sidebar Toggle Functionality
     const toggleBtn = document.getElementById('toggle-sidebar');
     const sidebar = document.getElementById('sidebar');
@@ -23,11 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.top-nav .nav-item');
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent jump to top for demo purposes
-            
+            const href = item.getAttribute('href');
+
+            if (!href || href === '#') {
+                e.preventDefault();
+            }
+
             // Remove active class from all
             navItems.forEach(nav => nav.classList.remove('active'));
-            
+
             // Add active class to clicked
             item.classList.add('active');
         });
