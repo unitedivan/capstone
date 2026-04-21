@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Using Phosphor Icons for a clean, modern icon set -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="jquery.js"></script>
+    <script src="jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#accordion" ).accordion();
+
+        }  );
+    </script>
 </head>
 
 <body>
@@ -80,6 +88,7 @@
                 <div class="content-card glass-panel" id="commission-page">
                     <h1 class="page-title">Settings</h1>
                     <!--ACCOUNT INFORMATION-->
+                    
                     <main class="settings-content">
                         <section class="account-settings">
                             <h2>Account Information</h2>
@@ -118,6 +127,14 @@
                                 <input type="checkbox" id="push-notify" name="push-notify">
                                 <label for="push-notify">Enable push notifications</label>
                             </div>
+                            <div class="setting-item">
+                                <input type="checkbox" id="art-updates" name="art-updates">
+                                <label for="art-updates">Receive updates on new art and artists</label>
+                            </div>
+                            <div class="setting-item">
+                                <input type="checkbox" id="event-notify" name="event-notify">
+                                <label for="event-notify">Notify me about upcoming art events</label>
+                            </div>
                             <button class="btn btn-primary" id="noti-settings" type="button"> Save Notification Settings</button>
                         </form>
                         </h3>
@@ -127,21 +144,33 @@
                     <section class="theme-settings">
                         <h2>Appearance</h2>
                         <h3>
-                        <form action="#" method="POST">
+
                             <div class="setting-item">
-                                <label for="theme">Select Theme:</label>
-                                <select id="theme" name="theme">
-                                    <option value="light">Light Mode</option>
-                                    <option value="dark" selected>Dark Mode</option>
-                                    <option value="system">System Default</option>
-                                </select>
+                                <button 
+                                    class="btn btn-primary"
+                                    type="button"
+                                    data-theme-toggle
+                                    aria-label="Change to light theme">
+                                Change to light mode </button>
                             </div>
-                            <button class="btn btn-primary" id="apply-theme" type="button"> Apply Theme</button>
-                        </form>
                         </h3>
                     </section>
 
-                    <!---->
+                    <!--CONTENT PREFERENCES-->
+                    <section class="content-preferences">
+                        <h2>Content Preferences</h2>
+                        <h3> Select the types of content you want to see:</h3>
+                        <div class="btn btn" style="display: flex; flex-direction:column">
+                            <label><input type="checkbox" name="content-pref" value="digital-art"> Digital Art</label>
+                            <label><input type="checkbox" name="content-pref" value="pottery"> Pottery</label>
+                            <label><input type="checkbox" name="content-pref" value="jewelry"> Jewelry</label>
+                            <label><input type="checkbox" name="content-pref" value="music"> Music</label>
+                            <label><input type="checkbox" name="content-pref" value="crochet"> Crochet</label>
+                        </div>
+
+                        <button class="btn btn-primary" id="content-prefs" type="button"> Save Content Preferences</button>
+                        </form>
+                        </h3>
 
 
 
@@ -154,7 +183,7 @@
             </main>
         </div>
     </div>
-
+    <script src="theme.js"></script>
     <script src="script.js"></script>
     <script src="commissions.js"></script>
 </body>

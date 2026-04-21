@@ -1,5 +1,9 @@
 /* Base Variables and Theme Setup */
 :root {
+
+
+
+
     /* Color Palette - Vibrant, creative aesthetic */
     /* Yellow */
     --bg-color-1: #fef08a;
@@ -1294,4 +1298,12 @@ a {
 .theme-settings {
     line-height: 40px;
     padding-bottom: 30px;
+}
+
+[data-theme="light"]{
+    --bg-color-1: #fef08a;
+}
+
+[data-theme="dark"]{
+    --bg-color-1:#000000;
 }
